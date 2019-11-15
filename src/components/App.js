@@ -8,7 +8,7 @@ export default class App extends React.Component{
     render(){
         return(
             <React.Fragment>
-                <Route path='/' exact component={Login} />
+                <LoggedInRoute path='/' exact component={Login} />
                 <PrivateRoute path='/home' component={Home} />
             </React.Fragment>
         )

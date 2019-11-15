@@ -1,19 +1,21 @@
 import React from "react";
 import axios from "axios";
-import { setUserInCookie,checkIsAuthenticated } from "../users/index";
+import { setUserInCookie, checkIsAuthenticated } from "../users/index";
+import { Link } from "react-router-dom";
 
 export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userName: ""
+			userName: "",
+			cookie_added: false
 		};
 	}
 
 	//getting userInput
 	getUserName = e => {
 		// storing in state
-		let user = e.target.value
+		let user = e.target.value;
 		this.setState({
 			userName: user
 		});
@@ -37,7 +39,10 @@ export default class Login extends React.Component {
 					});
 					alert("Sorry no user found !");
 				} else {
-					setUserInCookie("userName", this.state.userName);
+					setUserInCookie("userName", checkUserName.username);
+					// this.props.history.push("/home")
+					setUserInCookie("name", checkUserName.name);
+					;
 				}
 			})
 			.catch(error => {
@@ -47,24 +52,21 @@ export default class Login extends React.Component {
 
 	login = () => {
 		//checking userName field is empty or not and then calling the API
-		
+
 		if (this.state.userName !== "") {
 			//calling the API function
 			this.getUserFromApi();
-			let user = checkIsAuthenticated()
-			console.log(user.isAuthenticated)
-			if(user.isAuthenticated){
-				this.props.history.push("/home")
-			}
-			
+			console.log(this.state.cookie_added)
+			// if(this.state.cookie_added ===  true){
+			// 	this.props.history.push("/home")
+			// }
 		} else {
 			alert("Sorry Username should not be empty!");
 		}
 	};
 
 	render() {
-		let user = checkIsAuthenticated()
-			console.log(user.isAuthenticated)
+		// console.log(this.props.history)
 		console.log(this.state.userName);
 		return (
 			<React.Fragment>
@@ -91,14 +93,17 @@ export default class Login extends React.Component {
 													/>
 												</div>
 												<div className='container text-center'>
-													<button
-														type='button'
-														className='btn btn-primary btn-lg '
-														id='btnLogin'
-														onClick={()=>{this.login()}}
-													>
-														Login
-													</button>
+													{" "}
+													<Link to={"/home"}>
+														<button
+															type='button'
+															className='btn btn-primary btn-lg '
+															id='btnLogin'
+															onClick={()=>{this.login()}}
+														>
+															Login
+														</button>{" "}
+													</Link>
 												</div>
 											</form>
 										</div>
