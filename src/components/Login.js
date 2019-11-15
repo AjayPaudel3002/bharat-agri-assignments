@@ -1,22 +1,33 @@
 import React from "react";
 import axios from "axios";
-import {setUserInCookie} from "../users/index"
+import { setUserInCookie,checkIsAuthenticated } from "../users/index";
 
 export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userName: "",
+			userName: ""
 		};
 	}
 
+	//getting userInput
+	getUserName = e => {
+		// storing in state
+		let user = e.target.value
+		this.setState({
+			userName: user
+		});
+	};
+
+	//getting data from API
 	getUserFromApi = () => {
 		axios
 			.get("https://jsonplaceholder.typicode.com/users")
 			.then(response => {
 				console.log(response);
+				//removing the white spaces using trim
 				let checkUserName = response.data.find(user => {
-					return this.state.userName === user.username;
+					return this.state.userName.trim() === user.username;
 				});
 				console.log(checkUserName);
 				//checking whether the respective user is found in list of users which got through API or not .
@@ -25,8 +36,7 @@ export default class Login extends React.Component {
 						userName: ""
 					});
 					alert("Sorry no user found !");
-				}
-				else{
+				} else {
 					setUserInCookie("userName", this.state.userName);
 				}
 			})
@@ -37,16 +47,25 @@ export default class Login extends React.Component {
 
 	login = () => {
 		//checking userName field is empty or not and then calling the API
+		
 		if (this.state.userName !== "") {
 			//calling the API function
 			this.getUserFromApi();
+			let user = checkIsAuthenticated()
+			console.log(user.isAuthenticated)
+			if(user.isAuthenticated){
+				this.props.history.push("/home")
+			}
+			
 		} else {
 			alert("Sorry Username should not be empty!");
 		}
 	};
 
 	render() {
-		console.log(this.state.users);
+		let user = checkIsAuthenticated()
+			console.log(user.isAuthenticated)
+		console.log(this.state.userName);
 		return (
 			<React.Fragment>
 				<div className='container py-5'>
@@ -68,7 +87,7 @@ export default class Login extends React.Component {
 														name='uname1'
 														id='uname1'
 														value={this.state.userName}
-														onChange={e => this.setState({ userName: e.target.value })}
+														onChange={this.getUserName}
 													/>
 												</div>
 												<div className='container text-center'>
@@ -76,7 +95,7 @@ export default class Login extends React.Component {
 														type='button'
 														className='btn btn-primary btn-lg '
 														id='btnLogin'
-														onClick={this.login}
+														onClick={()=>{this.login()}}
 													>
 														Login
 													</button>
