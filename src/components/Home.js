@@ -20,8 +20,8 @@ export default class Home extends React.Component {
 	}
 
 	getSearchResults = search => {
-        let updateSearch = queryString.parse(search);
-        console.log(search)
+		let updateSearch = queryString.parse(search);
+		console.log(updateSearch);
 		updateSearch.apikey = "550c4b1f";
 		axios
 			.get("http://www.omdbapi.com", {
@@ -48,18 +48,18 @@ export default class Home extends React.Component {
 		console.log(updateSearch.s);
 		if (updateSearch.s !== undefined) {
 			updateSearch.apikey = "550c4b1f";
-            this.getSearchResults(queryString.stringify(updateSearch));
-            this.setState({
-                search:updateSearch
-            })
+			this.getSearchResults(queryString.stringify(updateSearch));
+			this.setState({
+				search: queryString.parse(this.props.location.search)
+			});
 			console.log(updateSearch);
 		}
 	}
 
 	getMovies = searchInput => {
-        let updateSearch = this.state.search
-        console.log(this.state.search)
-        updateSearch.s = searchInput;
+		let updateSearch = this.state.search;
+		console.log(this.state.search);
+		updateSearch.s = searchInput;
 		console.log(updateSearch);
 		if (searchInput !== " ") {
 			this.getSearchResults(queryString.stringify(updateSearch));
@@ -76,14 +76,17 @@ export default class Home extends React.Component {
 	};
 
 	render() {
-		console.log(this.state.search);
+		console.log(this.state.movies);
 		return (
 			<React.Fragment>
 				<Nav getMovies={this.getMovies}></Nav>
-				{this.state.movies === undefined ? (
-					<Welcome></Welcome>
-				) : (
+                <br></br>
+                <br></br>
+                <br></br>
+				{this.state.movies !== undefined && this.state.movies.length !== 0 ? (
 					<Search movies={this.state.movies} totalCounts={this.state.totalCounts}></Search>
+				) : (
+					<Welcome></Welcome>
 				)}
 			</React.Fragment>
 		);
