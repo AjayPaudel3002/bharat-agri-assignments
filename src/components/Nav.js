@@ -1,6 +1,7 @@
 import React from "react";
 import { Router as BrowserRouter, Link, Route, Switch } from "react-router-dom";
-import { checkIsAuthenticated, clearUser } from "../users/index";
+import { checkIsAuthenticated, clearUser, getUserFromCookie } from "../users/index";
+import { accessSearchFromLocalStorage } from "../users/local-storage";
 
 class Nav extends React.Component {
 	constructor(props) {
@@ -8,6 +9,17 @@ class Nav extends React.Component {
 		this.state = {
 			searchInput: ""
 		};
+	}
+	getDataOptions = () => {
+		let userName = getUserFromCookie("userName");
+		let searchList = accessSearchFromLocalStorage(userName);
+		if(searchList && searchList.length){
+			return searchList.map(search => {
+				return (
+					<option value={search}>{search}</option>
+				)
+			})
+		}
 	}
 	render() {
 		let is_logged_in = checkIsAuthenticated("UserName");
@@ -42,6 +54,7 @@ class Nav extends React.Component {
 									list='encodings'
 								/>
 								<datalist id='encodings'>
+									{this.getDataOptions()}
 									{/* <option value='ISO-8859-1'>ISO-8859-1</option>
 									<option value='cp1252'>ANSI</option>
 									<option value='utf8'>UTF-8</option> */}

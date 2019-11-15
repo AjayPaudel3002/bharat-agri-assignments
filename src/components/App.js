@@ -7,10 +7,10 @@ import {PrivateRoute,LoggedInRoute} from "./Routes"
 export default class App extends React.Component{
     render(){
         return(
-            <React.Fragment>
+            <Switch>
                 <LoggedInRoute path='/' exact component={Login} />
                 <PrivateRoute path='/home' component={Home} />
-            </React.Fragment>
+            </Switch>
         )
     }
 }
