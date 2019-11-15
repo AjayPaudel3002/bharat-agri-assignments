@@ -40,9 +40,8 @@ export default class Login extends React.Component {
 					alert("Sorry no user found !");
 				} else {
 					setUserInCookie("userName", checkUserName.username);
-					// this.props.history.push("/home")
 					setUserInCookie("name", checkUserName.name);
-					;
+					this.props.history.push("/home");
 				}
 			})
 			.catch(error => {
@@ -56,7 +55,7 @@ export default class Login extends React.Component {
 		if (this.state.userName !== "") {
 			//calling the API function
 			this.getUserFromApi();
-			console.log(this.state.cookie_added)
+			// console.log(this.state.cookie_added)
 			// if(this.state.cookie_added ===  true){
 			// 	this.props.history.push("/home")
 			// }
@@ -96,7 +95,7 @@ export default class Login extends React.Component {
 													{" "}
 													<Link to={"/home"}>
 														<button
-															type='button'
+															type='submit'
 															className='btn btn-primary btn-lg '
 															id='btnLogin'
 															onClick={()=>{this.login()}}

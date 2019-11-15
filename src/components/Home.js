@@ -5,6 +5,7 @@ import queryString from "query-string";
 import { getUserFromCookie } from "../users/index";
 import Welcome from "./Welcome";
 import Search from "./Search";
+import { setSearchForUserInLocalStorage } from "../users/local-storage";
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -62,6 +63,8 @@ export default class Home extends React.Component {
 		updateSearch.s = searchInput;
 		console.log(updateSearch);
 		if (searchInput !== " ") {
+			let userName = getUserFromCookie("userName");
+			setSearchForUserInLocalStorage(userName,searchInput);
 			this.getSearchResults(queryString.stringify(updateSearch));
 			console.log(updateSearch);
 			this.setState(
