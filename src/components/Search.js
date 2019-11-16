@@ -1,14 +1,12 @@
 import React from "react";
-import axios from "axios";
-import Nav from "./Nav";
-import {Pagination} from "./Pagination";
 import { getUserFromCookie } from "../users/index";
+
 
 export default class Search extends React.Component {
 	render() {
 		let user = getUserFromCookie("name");
-        console.log(this.props.totalCounts);
-        let totalCounts = this.props.totalCounts
+		console.log(this.props.totalCounts);
+		let totalCounts = this.props.totalCounts;
 		return (
 			<React.Fragment>
 				<div className='container-fluid'>
@@ -37,7 +35,6 @@ export default class Search extends React.Component {
 							);
 						})}
 					</div>
-                    <Pagination totalCounts = { totalCounts}></Pagination>
 				</div>
 			</React.Fragment>
 		);

@@ -6,6 +6,7 @@ import { getUserFromCookie } from "../users/index";
 import Welcome from "./Welcome";
 import Search from "./Search";
 import { setSearchForUserInLocalStorage } from "../users/local-storage";
+import { Pagination } from "./Pagination";
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -20,6 +21,7 @@ export default class Home extends React.Component {
 		};
 	}
 
+	//call api
 	getSearchResults = search => {
 		let updateSearch = queryString.parse(search);
 		console.log(updateSearch);
@@ -30,10 +32,11 @@ export default class Home extends React.Component {
 			})
 			.then(response => {
 				console.log(response);
+				let totalResults = Number(response.data.totalResults);
 				if (response.data.Response === "True") {
 					this.setState({
 						movies: response.data.Search,
-						totalCounts: response.data.totalResults
+						totalCounts: Math.ceil(totalResults / 10)
 					});
 				} else {
 					alert(response.data.Error);
@@ -46,7 +49,7 @@ export default class Home extends React.Component {
 
 	componentDidMount() {
 		let updateSearch = queryString.parse(this.props.location.search);
-		console.log(updateSearch.s);
+		console.log(updateSearch);
 		if (updateSearch.s !== undefined) {
 			updateSearch.apikey = "550c4b1f";
 			this.getSearchResults(queryString.stringify(updateSearch));
@@ -57,14 +60,16 @@ export default class Home extends React.Component {
 		}
 	}
 
+	//search movies
 	getMovies = searchInput => {
 		let updateSearch = this.state.search;
 		console.log(this.state.search);
 		updateSearch.s = searchInput;
+		updateSearch.page = 1;
 		console.log(updateSearch);
 		if (searchInput !== " ") {
 			let userName = getUserFromCookie("userName");
-			setSearchForUserInLocalStorage(userName,searchInput);
+			setSearchForUserInLocalStorage(userName, searchInput);
 			this.getSearchResults(queryString.stringify(updateSearch));
 			console.log(updateSearch);
 			this.setState(
@@ -78,16 +83,75 @@ export default class Home extends React.Component {
 		}
 	};
 
+	changePage = page => {
+		let updateSearch = this.state.search;
+		console.log(page);
+		if (page == "Next" || page == "Prev") {
+			if (page == "Next") {
+				updateSearch.page = this.state.search.page + 1;
+				console.log(page);
+				this.setState(
+					{
+						search: updateSearch
+					},
+					() => {
+						this.props.history.push(`/?${queryString.stringify(updateSearch)}`);
+					}
+				);
+				this.getSearchResults(queryString.stringify(updateSearch));
+			} else {
+				console.log(page);
+				updateSearch.page = this.state.search.page - 1;
+				this.setState(
+					{
+						search: updateSearch
+					},
+					() => {
+						this.props.history.push(`?${queryString.stringify(updateSearch)}`);
+					}
+				);
+				this.getSearchResults(queryString.stringify(updateSearch));
+			}
+		} else {
+			console.log(page);
+			updateSearch.page = page;
+			this.setState(
+				{
+					search: updateSearch
+				},
+				() => {
+					this.props.history.push(`?${queryString.stringify(updateSearch)}`);
+				}
+			);
+			this.getSearchResults(queryString.stringify(updateSearch));
+		}
+	};
+
 	render() {
-		console.log(this.state.movies);
+		console.log(this.state.search);
 		return (
 			<React.Fragment>
 				<Nav getMovies={this.getMovies}></Nav>
-                <br></br>
-                <br></br>
-                <br></br>
+				<br></br>
+				<br></br>
+				<br></br>
 				{this.state.movies !== undefined && this.state.movies.length !== 0 ? (
-					<Search movies={this.state.movies} totalCounts={this.state.totalCounts}></Search>
+					<React.Fragment>
+						<Search
+							movies={this.state.movies}
+							totalCounts={this.state.totalCounts}
+							search={this.state.search}
+						></Search>
+						<br></br>
+						<br></br>
+						<br></br>
+						<Pagination
+							movies={this.state.movies}
+							totalCounts={this.state.totalCounts}
+							search={this.state.search}
+							changePage={this.changePage}
+						></Pagination>
+					</React.Fragment>
 				) : (
 					<Welcome></Welcome>
 				)}

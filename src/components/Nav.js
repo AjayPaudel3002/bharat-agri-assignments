@@ -10,17 +10,17 @@ class Nav extends React.Component {
 			searchInput: ""
 		};
 	}
+	//to get the history of searchers of users
 	getDataOptions = () => {
 		let userName = getUserFromCookie("userName");
 		let searchList = accessSearchFromLocalStorage(userName);
-		if(searchList && searchList.length){
+		if (searchList && searchList.length) {
 			return searchList.map(search => {
-				return (
-					<option value={search}>{search}</option>
-				)
-			})
+				return <option value={search}>{search}</option>;
+			});
 		}
-	}
+	};
+
 	render() {
 		let is_logged_in = checkIsAuthenticated("UserName");
 		console.log(is_logged_in);
@@ -47,18 +47,13 @@ class Nav extends React.Component {
 								<input
 									className='form-control mr-sm-2 ml-3'
 									type='text'
-									placeholder='mobile brands'
+									placeholder='search movies'
 									aria-label='Search'
 									onChange={e => this.setState({ searchInput: e.target.value })}
 									value={this.state.searchInput}
 									list='encodings'
 								/>
-								<datalist id='encodings'>
-									{this.getDataOptions()}
-									{/* <option value='ISO-8859-1'>ISO-8859-1</option>
-									<option value='cp1252'>ANSI</option>
-									<option value='utf8'>UTF-8</option> */}
-								</datalist>
+								<datalist id='encodings'>{this.getDataOptions()}</datalist>
 							</form>
 							<button
 								className='btn my-sm-0'
@@ -87,8 +82,7 @@ class Nav extends React.Component {
 							) : null}
 						</ul>
 					</div>
-				</nav>
-				​ ​ ​
+				</nav>	​ ​ ​
 			</div>
 		);
 	}

@@ -51,14 +51,9 @@ export default class Login extends React.Component {
 
 	login = () => {
 		//checking userName field is empty or not and then calling the API
-
 		if (this.state.userName !== "") {
 			//calling the API function
 			this.getUserFromApi();
-			// console.log(this.state.cookie_added)
-			// if(this.state.cookie_added ===  true){
-			// 	this.props.history.push("/home")
-			// }
 		} else {
 			alert("Sorry Username should not be empty!");
 		}
