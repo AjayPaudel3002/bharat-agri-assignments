@@ -64,7 +64,7 @@ export default class Login extends React.Component {
 		console.log(this.state.userName);
 		return (
 			<React.Fragment>
-				<div className='container py-5'>
+		<div className='container py-5'>
 					<div className='row'>
 						<div className='col-md-12'>
 							<div className='row'>
@@ -73,7 +73,7 @@ export default class Login extends React.Component {
 										<div className='card-header'>
 											<h3 className='mb-0'>Login</h3>
 										</div>
-										<div className='card-body'>
+										<div className='card-body shadow bg-white rounded mt-5'>
 											<form className='form'>
 												<div className='form-group'>
 													<label for='uname1'>Username</label>
@@ -86,19 +86,18 @@ export default class Login extends React.Component {
 														onChange={this.getUserName}
 													/>
 												</div>
-												<div className='container text-center'>
-													{" "}
-													<Link to={"/home"}>
-														<button
-															type='submit'
-															className='btn btn-primary btn-lg '
-															id='btnLogin'
-															onClick={()=>{this.login()}}
-														>
-															Login
-														</button>{" "}
-													</Link>
-												</div>
+												<Link to={"/home"}>
+													<button
+														type='submit'
+														className='btn btn-dark btn-lg '
+														id='btnLogin'
+														onClick={() => {
+															this.login();
+														}}
+													>
+														Login
+													</button>
+												</Link>
 											</form>
 										</div>
 									</div>

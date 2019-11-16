@@ -35,7 +35,7 @@ export default class Movie extends React.Component {
         console.log(this.state.movie)
 		return (
 			<React.Fragment>
-				{/* <div className='container '>
+				<div className='container '>
 					<div
 						className='card mb-3 '
 						style={{
@@ -43,23 +43,9 @@ export default class Movie extends React.Component {
 						}}
 					>
 						<img src='./placeholder.png' className='card-img-top' alt='...' height='350px' />
-						<div className='card-body '>
-							<div className='float-left'>
-								<h2 style={{ fontFamily: "Acme, seri" }} className='card-title'>
-									{this.state.restaurants.cuisines}
-								</h2>
-								<p style={{ fontFamily: "Livvic, sans-serif" }}>{location}</p>
-								<p style={{ fontFamily: "Livvic, sans-serif" }}>
-									{this.state.restaurants.cuisines}
-								</p>
-							</div>
-							<div className='float-right'>
-								<h2 style={{ backgroundColor: "green" }}>{rating}/5</h2>
-								<p style={{ fontFamily: "Livvic, sans-serif" }}>{vote_count + " "}votes</p>
-							</div>
-						</div>
+						
 					</div>
-				</div> */}
+				</div>
 			</React.Fragment>
 		);
 	}
