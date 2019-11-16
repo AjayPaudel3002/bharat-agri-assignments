@@ -1,5 +1,5 @@
 import React from "react";
-import { Router as BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { checkIsAuthenticated, clearUser, getUserFromCookie } from "../users/index";
 import { accessSearchFromLocalStorage } from "../users/local-storage";
 
@@ -15,8 +15,12 @@ class Nav extends React.Component {
 		let userName = getUserFromCookie("userName");
 		let searchList = accessSearchFromLocalStorage(userName);
 		if (searchList && searchList.length) {
-			return searchList.map(search => {
-				return <option value={search}>{search}</option>;
+			return searchList.map((search, index) => {
+				return (
+					<option key={"option" + index} value={search}>
+						{search}
+					</option>
+				);
 			});
 		}
 	};
@@ -25,10 +29,11 @@ class Nav extends React.Component {
 		let is_logged_in = checkIsAuthenticated("UserName");
 		console.log(is_logged_in);
 		return (
-			<div>
+			<div className='container'>
 				<nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
-					<a className='navbar-brand pl-5' href='#'>
-						MovieDatabase
+					<a className='navbar-brand pl-5' href='/'>
+						<i className='fas fa-film' />
+						<span> Movie Database</span>
 					</a>
 					<button
 						className='navbar-toggler'
@@ -43,46 +48,50 @@ class Nav extends React.Component {
 					</button>
 					<div className='collapse navbar-collapse ' id='navbarCollapse'>
 						<ul className='navbar-nav ml-auto'>
-							<form className='form-inline mt-2 mt-md-0 text-center'>
+							<form className='form-inline mt-8 mt-md-0 text-center'>
 								<input
-									className='form-control mr-sm-2 ml-3'
+									className='form-control mr-sm-2 ml-5'
 									type='text'
-									placeholder='search movies'
+									placeholder='Search movies'
 									aria-label='Search'
 									onChange={e => this.setState({ searchInput: e.target.value })}
 									value={this.state.searchInput}
 									list='encodings'
 								/>
+
 								<datalist id='encodings'>{this.getDataOptions()}</datalist>
+								<button
+									className='btn my-sm-0 btn-secondary'
+									type='button'
+									onClick={() => {
+										this.props.getMovies(this.state.searchInput.trim());
+									}}
+								>
+									<span> Search</span>
+								</button>
 							</form>
-							<button
-								className='btn my-sm-0'
-								type='button'
-								onClick={() => {
-									this.props.getMovies(this.state.searchInput.trim());
-								}}
-							>
-								Search
-							</button>
+						</ul>
+						<span class='navbar-text'>
 							{is_logged_in.isAuthenticated ? (
-								<li className='nav-item'>
-									<Link to={`/`} className='mr-3'>
+								<ul className='navbar-nav ml-5'>
+									<Link to={`/`}>
 										<li
 											className='nav-item mr-3'
 											onClick={() => {
 												clearUser("userName");
 												clearUser("name");
-												window.location.reload();
 											}}
 										>
-											Log Out
+											<i className='fas fa-sign-out-alt' />
+											<span> Log Out</span>
 										</li>
 									</Link>
-								</li>
+								</ul>
 							) : null}
-						</ul>
+						</span>
 					</div>
-				</nav>	​ ​ ​
+				</nav>{" "}
+				​ ​ ​
 			</div>
 		);
 	}

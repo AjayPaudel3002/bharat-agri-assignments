@@ -8,12 +8,12 @@ export class Pagination extends React.Component {
 				{this.props.totalCounts !== 0 ? (
 					<nav aria-label='Page navigation example'>
 						<ul className='pagination'>
-							{Number(this.props.totalCounts) <= Number(this.props.search.page) - 1 ? (
+							{Number(this.props.totalCounts) >= Number(this.props.search.page) - 1 && Number(this.props.search.page) > 1 ? (
 								<li>
 									<button
 										type='button'
-										className=' btn btn-outline-success'
-										onClick={e => this.props.changePage(e.target.textContent)}
+										className=' btn btn-outline-info'
+										onClick={e => this.props.changePage(Number(this.props.search.page) - 1)}
 										name={Number(this.props.search.page) - 1}
 									>
 										{" "}
@@ -24,7 +24,7 @@ export class Pagination extends React.Component {
 								<li>
 									<button
 										type='button'
-										className=' btn btn-outline-success'
+										className=' btn btn-outline-info'
 										disabled
 										name={Number(this.props.search.page) - 1}
 									>
@@ -36,6 +36,7 @@ export class Pagination extends React.Component {
 
 							{Number(this.props.totalCounts) >= Number(this.props.search.page) + 1 ? (
 								<li
+									style={{ cursor: "pointer" }}
 									className='page-item'
 									className='page-link'
 									onClick={e => this.props.changePage(e.target.textContent)}
@@ -46,6 +47,7 @@ export class Pagination extends React.Component {
 							) : null}
 							{this.props.totalCounts >= Number(this.props.search.page) + 2 ? (
 								<li
+									style={{ cursor: "pointer" }}
 									className='page-item'
 									className='page-link'
 									onClick={e => this.props.changePage(e.target.textContent)}
@@ -56,6 +58,7 @@ export class Pagination extends React.Component {
 							) : null}
 							{this.props.totalCounts >= Number(this.props.search.page) + 3 ? (
 								<li
+									style={{ cursor: "pointer" }}
 									className='page-item'
 									className='page-link'
 									onClick={e => this.props.changePage(e.target.textContent)}
@@ -68,8 +71,8 @@ export class Pagination extends React.Component {
 								<li>
 									<button
 										type='button'
-										className='btn btn-outline-success'
-										onClick={e => this.props.changePage(e.target.textContent)}
+										className='btn btn-outline-info'
+										onClick={e => this.props.changePage(Number(this.props.search.page) + 1)}
 										name={Number(this.props.search.page) + 1}
 									>
 										{" "}
@@ -80,8 +83,8 @@ export class Pagination extends React.Component {
 								<li>
 									<button
 										typer='button'
-                                        className=' btn btn-outline-success disabled'
-                                        disabled
+										className=' btn btn-outline-info disabled'
+										disabled
 										name={Number(this.props.search.page) + 1}
 									>
 										Next

@@ -82,49 +82,20 @@ export default class Home extends React.Component {
 			);
 		}
 	};
-
+	//pagination
 	changePage = page => {
 		let updateSearch = this.state.search;
 		console.log(page);
-		if (page == "Next" || page == "Prev") {
-			if (page == "Next") {
-				updateSearch.page = this.state.search.page + 1;
-				console.log(page);
-				this.setState(
-					{
-						search: updateSearch
-					},
-					() => {
-						this.props.history.push(`/?${queryString.stringify(updateSearch)}`);
-					}
-				);
-				this.getSearchResults(queryString.stringify(updateSearch));
-			} else {
-				console.log(page);
-				updateSearch.page = this.state.search.page - 1;
-				this.setState(
-					{
-						search: updateSearch
-					},
-					() => {
-						this.props.history.push(`?${queryString.stringify(updateSearch)}`);
-					}
-				);
-				this.getSearchResults(queryString.stringify(updateSearch));
+		updateSearch.page = page;
+		this.setState(
+			{
+				search: updateSearch
+			},
+			() => {
+				this.props.history.push(`?${queryString.stringify(updateSearch)}`);
 			}
-		} else {
-			console.log(page);
-			updateSearch.page = page;
-			this.setState(
-				{
-					search: updateSearch
-				},
-				() => {
-					this.props.history.push(`?${queryString.stringify(updateSearch)}`);
-				}
-			);
-			this.getSearchResults(queryString.stringify(updateSearch));
-		}
+		);
+		this.getSearchResults(queryString.stringify(updateSearch));
 	};
 
 	render() {
@@ -141,6 +112,7 @@ export default class Home extends React.Component {
 							movies={this.state.movies}
 							totalCounts={this.state.totalCounts}
 							search={this.state.search}
+							{...this.props}
 						></Search>
 						<br></br>
 						<br></br>
