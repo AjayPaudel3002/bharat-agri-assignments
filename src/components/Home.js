@@ -116,7 +116,6 @@ export default class Home extends React.Component {
 						></Search>
 						<br></br>
 						<br></br>
-						<br></br>
 						<Pagination
 							movies={this.state.movies}
 							totalCounts={this.state.totalCounts}

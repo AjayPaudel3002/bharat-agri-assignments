@@ -5,17 +5,20 @@ export default class Search extends React.Component {
 		console.log(this.props);
 		return (
 			<React.Fragment>
-				<div className='container-fluid'>
+				<div className='container text-center'>
 					<div className='row'>
 						{this.props.movies.map((item, index) => {
 							return (
 								<div
 									onClick={() => this.props.history.push(`/movies?title=${item.Title}`)}
 									key={"movie-" + index}
-									style= {{cursor:"pointer"}}
-									className='col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4  '
+									style={{ cursor: "pointer" }}
+									className='col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-4  '
 								>
-									<div className='card shadow-sm bg-white ' style={{ width: "23rem", height: "500px" }}>
+									<div
+										className='card shadow-sm bg-white '
+										style={{ width: "23rem", height: "500px" }}
+									>
 										{item.Poster !== "N/A" ? (
 											<img
 												src={item.Poster}

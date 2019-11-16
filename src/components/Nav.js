@@ -10,6 +10,7 @@ class Nav extends React.Component {
 			searchInput: ""
 		};
 	}
+	
 	//to get the history of searchers of users
 	getDataOptions = () => {
 		let userName = getUserFromCookie("userName");
@@ -26,15 +27,16 @@ class Nav extends React.Component {
 	};
 
 	render() {
+		console.log(this.state.searchInput);
 		let is_logged_in = checkIsAuthenticated("UserName");
 		console.log(is_logged_in);
 		return (
 			<div className='container'>
 				<nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
-					<a className='navbar-brand pl-5' href='/'>
+					<div className='navbar-brand pl-5' style ={{cursor:"pointer"}}>
 						<i className='fas fa-film' />
 						<span> Movie Database</span>
-					</a>
+					</div>
 					<button
 						className='navbar-toggler'
 						type='button'
