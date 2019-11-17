@@ -24,14 +24,14 @@ export default class Home extends React.Component {
 	//call api
 	getSearchResults = search => {
 		let updateSearch = queryString.parse(search);
-		console.log(updateSearch);
+		//console.log(updateSearch);
 		updateSearch.apikey = "550c4b1f";
 		axios
 			.get("http://www.omdbapi.com", {
 				params: updateSearch
 			})
 			.then(response => {
-				console.log(response);
+				//console.log(response);
 				let totalResults = Number(response.data.totalResults);
 				if (response.data.Response === "True") {
 					this.setState({
@@ -49,7 +49,7 @@ export default class Home extends React.Component {
 
 	componentDidMount() {
 		let updateSearch = queryString.parse(this.props.location.search);
-		console.log(updateSearch);
+		//console.log(updateSearch);
 		if (updateSearch.s !== undefined) {
 			updateSearch.apikey = "550c4b1f";
 			this.getSearchResults(queryString.stringify(updateSearch));
@@ -73,16 +73,16 @@ export default class Home extends React.Component {
 	getMovies = searchInput => {
 		let updateSearch = this.state.search;
 		let searchValue = this.state.search;
-		console.log(searchValue);
-		console.log(this.state.search);
+		//console.log(searchValue);
+		//console.log(this.state.search);
 		updateSearch.s = searchInput;
 		updateSearch.page = 1;
-		console.log(updateSearch);
+		//console.log(updateSearch);
 		if (searchInput !== "") {
 			let userName = getUserFromCookie("userName");
 			setSearchForUserInLocalStorage(userName, searchInput);
 			this.getSearchResults(queryString.stringify(updateSearch));
-			console.log(updateSearch);
+			//console.log(updateSearch);
 			this.setState(
 				{
 					search: updateSearch
@@ -96,7 +96,7 @@ export default class Home extends React.Component {
 	//pagination
 	changePage = page => {
 		let updateSearch = this.state.search;
-		console.log(page);
+		//console.log(page);
 		updateSearch.page = page;
 		this.setState(
 			{
@@ -110,9 +110,9 @@ export default class Home extends React.Component {
 	};
 
 	render() {
-		console.log(this.state.search);
+		//console.log(this.state.search);
 		let updateSearch = queryString.parse(this.props.location.search);
-		console.log(updateSearch);
+		//console.log(updateSearch);
 		return (
 			<React.Fragment>
 				<Nav getMovies={this.getMovies} {...this.props}></Nav>

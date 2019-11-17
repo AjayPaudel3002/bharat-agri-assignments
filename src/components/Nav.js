@@ -27,9 +27,9 @@ class Nav extends React.Component {
 	};
 
 	render() {
-		console.log(this.props.history);
+		//console.log(this.props.history);
 		let is_logged_in = checkIsAuthenticated("UserName");
-		console.log(is_logged_in);
+		//console.log(is_logged_in);
 		return (
 			<div className='container'>
 				<nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
@@ -50,8 +50,8 @@ class Nav extends React.Component {
 						<span className='navbar-toggler-icon'></span>
 					</button>
 					<div className='collapse navbar-collapse ' id='navbarCollapse'>
-						<ul class='navbar-nav mr-auto'>​</ul>
-						<div class='input-group col-lg-5 col-sm-5 col-md-6 mt-2'>
+						<ul className='navbar-nav mr-auto'>​</ul>
+						<div className='input-group col-lg-5 col-sm-5 col-md-6 mt-2'>
 							<input
 								className='form-control '
 								type='text'
@@ -63,7 +63,7 @@ class Nav extends React.Component {
 							/>
 
 							<datalist id='encodings'>{this.getDataOptions()}</datalist>
-							<div class='input-group-append'>
+							<div className='input-group-append'>
 								<div
 									className='btn my-sm-0 btn-secondary'
 									type='button'
@@ -71,11 +71,11 @@ class Nav extends React.Component {
 										this.props.getMovies(this.state.searchInput.trim());
 									}}
 								>
-									<i class='fa fa-search'></i>
+									<i className='fa fa-search'></i>
 								</div>
 							</div>
 						</div>
-						<div class='input-group col-lg-4 col-md-3 col-sm-5 mt-2'>
+						<div className='input-group col-lg-4 col-md-3 col-sm-5 mt-2'>
 							{is_logged_in.isAuthenticated ? (
 								<div
 									className='input-group'

@@ -26,12 +26,12 @@ export default class Login extends React.Component {
 		axios
 			.get("https://jsonplaceholder.typicode.com/users")
 			.then(response => {
-				console.log(response);
+				//console.log(response);
 				//removing the white spaces using trim
 				let checkUserName = response.data.find(user => {
 					return this.state.userName.trim() === user.username;
 				});
-				console.log(checkUserName);
+				//console.log(checkUserName);
 				//checking whether the respective user is found in list of users which got through API or not .
 				if (checkUserName === undefined) {
 					this.setState({
@@ -61,7 +61,7 @@ export default class Login extends React.Component {
 
 	render() {
 		// console.log(this.props.history)
-		console.log(this.state.userName);
+		//console.log(this.state.userName);
 		return (
 			<React.Fragment>
 				<div className='container py-5'>
@@ -76,7 +76,7 @@ export default class Login extends React.Component {
 										<div className='card-body shadow bg-white rounded mt-5'>
 											<form className='form'>
 												<div className='form-group'>
-													<label for='uname1'>Username</label>
+													<label >Username</label>
 													<input
 														type='text'
 														className='form-control form-control-lg rounded-5'

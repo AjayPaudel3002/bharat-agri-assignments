@@ -25,7 +25,7 @@ export default class Movie extends React.Component {
 					}
 				})
 				.then(response => {
-					console.log(response.data);
+					//console.log(response.data);
 					if (response.data.Response === "True") {
 						this.setState({
 							movie: response.data
@@ -46,18 +46,18 @@ export default class Movie extends React.Component {
 		//collecting the data which are not NA and which are available on the iconName
 		let details = [];
 		for (let i = 0; i < iconsName.length; i++) {
-			console.log(iconsName[i]);
+			//console.log(iconsName[i]);
 			let item = iconsName[i];
 			if (this.state.movie[item] !== "N/A") {
 				for (let j = 0; j < icons.length; j++) {
 					if (icons[j].name === item) {
-						console.log(icons[j][item]);
+						//console.log(icons[j][item]);
 						details.push({ name: item, value: this.state.movie[item], icon: icons[j][item] });
 					}
 				}
 			}
 		}
-		console.log(details);
+		//console.log(details);
 		if (details) {
 			this.setState({
 				movieDisplayDetails: details
@@ -66,7 +66,7 @@ export default class Movie extends React.Component {
 	};
 
 	render() {
-		console.log(this.props);
+		//console.log(this.props);
 		let is_logged_in = checkIsAuthenticated("UserName");
 		return (
 			<React.Fragment>
@@ -146,7 +146,7 @@ export default class Movie extends React.Component {
 					<div className='container'>
 						<div className='row'>
 							{this.state.movieDisplayDetails.map((item, index) => {
-								console.log(item);
+								//console.log(item);
 								return (
 									<div className='col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4' key ={"card" + index}>
 										<i className={item.icon}></i>
