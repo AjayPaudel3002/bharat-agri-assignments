@@ -65,6 +65,7 @@ export default class Movie extends React.Component {
 	};
 
 	render() {
+		console.log(this.props)
 		return (
 			<React.Fragment>
 				<Nav></Nav>

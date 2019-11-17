@@ -7,6 +7,9 @@ import Welcome from "./Welcome";
 import Search from "./Search";
 import { setSearchForUserInLocalStorage } from "../users/local-storage";
 import { Pagination } from "./Pagination";
+import {PrivateRoute} from "./Routes"
+import {Router as BrowserRoute,Route}  from "react-router-dom"
+import Movie from "./Movie"
 
 export default class Home extends React.Component {
 	constructor(props) {
@@ -62,6 +65,7 @@ export default class Home extends React.Component {
 			updateSearch.page = 1;
 			updateSearch.s = "movie";
 			this.getSearchResults(queryString.stringify(updateSearch));
+			delete updateSearch.apikey;
 			this.setState({
 				search: updateSearch
 			});
@@ -71,11 +75,13 @@ export default class Home extends React.Component {
 	//search movies
 	getMovies = searchInput => {
 		let updateSearch = this.state.search;
+		let searchValue = this.state.search;
+		console.log(searchValue);
 		console.log(this.state.search);
 		updateSearch.s = searchInput;
 		updateSearch.page = 1;
 		console.log(updateSearch);
-		if (searchInput !== " ") {
+		if (searchInput !== "") {
 			let userName = getUserFromCookie("userName");
 			setSearchForUserInLocalStorage(userName, searchInput);
 			this.getSearchResults(queryString.stringify(updateSearch));
@@ -85,7 +91,7 @@ export default class Home extends React.Component {
 					search: updateSearch
 				},
 				() => {
-					this.props.history.push(`?${queryString.stringify(updateSearch)}`);
+					this.props.history.push(`?${queryString.stringify(searchValue)}`);
 				}
 			);
 		}
@@ -109,9 +115,10 @@ export default class Home extends React.Component {
 	render() {
 		console.log(this.state.search);
 		let updateSearch = queryString.parse(this.props.location.search);
+		console.log(updateSearch);
 		return (
 			<React.Fragment>
-				<Nav getMovies={this.getMovies}></Nav>
+				<Nav getMovies={this.getMovies} {...this.props}></Nav>
 				<br></br>
 				<br></br>
 				<br></br>

@@ -1,4 +1,8 @@
 import React from "react";
+import {Redirect} from "react-router-dom"
+
+// import { FadeTransform, Fade, Stagger } from "react-animation-components";
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 export default class Search extends React.Component {
 	render() {
@@ -19,7 +23,7 @@ export default class Search extends React.Component {
 										className='card'
 										style={{
 											width: "21rem",
-											height:"500px",
+											height: "500px",
 											boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.29)"
 										}}
 									>

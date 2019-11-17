@@ -27,14 +27,15 @@ class Nav extends React.Component {
 	};
 
 	render() {
-		console.log(this.state.searchInput);
+		console.log(this.props.history);
 		let is_logged_in = checkIsAuthenticated("UserName");
 		console.log(is_logged_in);
 		return (
 			<div className='container'>
 				<nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
-					<div className='navbar-brand pl-5' style={{ cursor: "pointer" }}>
-						<i className='fas fa-film' />
+					<div className='navbar-brand pl-5' style={{ cursor: "pointer" }} onClick = {()=>this.props.history.push("/home")}>
+
+						<span ><i className='fas fa-film'/></span>
 						<span> Movie Database</span>
 					</div>
 					<button

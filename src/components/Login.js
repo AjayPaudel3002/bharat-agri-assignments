@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { setUserInCookie} from "../users/index";
+import { setUserInCookie } from "../users/index";
 import { Link } from "react-router-dom";
 
 export default class Login extends React.Component {
@@ -64,7 +64,7 @@ export default class Login extends React.Component {
 		console.log(this.state.userName);
 		return (
 			<React.Fragment>
-		<div className='container py-5'>
+				<div className='container py-5'>
 					<div className='row'>
 						<div className='col-md-12'>
 							<div className='row'>
