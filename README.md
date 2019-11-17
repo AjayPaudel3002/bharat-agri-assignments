@@ -1,4 +1,4 @@
-# Movie-o-pedia
+# Movie Database
 
 ### Features
 
