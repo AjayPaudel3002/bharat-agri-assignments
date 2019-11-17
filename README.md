@@ -2,10 +2,10 @@
 
 ### Features
 
-* Use Api from https://jsonplaceholder.typicode.com/ to get the username to login.    
+* Use this api  https://jsonplaceholder.typicode.com/ to get the username and then login .    
 * Validation is done,empty string or username which is not present in https://jsonplaceholder.typicode.com/ is entered then it will return error in alert box. 
 * Each page is protected, ie user can't switch to any pages if he is not loged in.
-* After loged in, user can able to make see the welcome note and the movies list which has been fetched from https://www.omdbapi.com/ .(Note: i have pushed with my api key)
+* After loged in, user can able to see the welcome note and movies list which has been fetched from https://www.omdbapi.com/ .(Note: i have pushed with my api key)
 * Made use of Cookies to store the user details when loged in and clearing the user details when loged out.
 * User can search for the name of movies,series.
 * Made use of local storage to store the serach history of each user.
