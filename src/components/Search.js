@@ -13,11 +13,15 @@ export default class Search extends React.Component {
 									onClick={() => this.props.history.push(`/movies?title=${item.Title}`)}
 									key={"movie-" + index}
 									style={{ cursor: "pointer" }}
-									className='col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-4  '
+									className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-5  '
 								>
 									<div
-										className='card shadow-sm bg-white '
-										style={{ width: "23rem", height: "500px" }}
+										className='card'
+										style={{
+											width: "21rem",
+											height:"500px",
+											boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.29)"
+										}}
 									>
 										{item.Poster !== "N/A" ? (
 											<img

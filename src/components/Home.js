@@ -57,6 +57,14 @@ export default class Home extends React.Component {
 				search: queryString.parse(this.props.location.search)
 			});
 			console.log(updateSearch);
+		} else {
+			updateSearch.apikey = "550c4b1f";
+			updateSearch.page = 1;
+			updateSearch.s = "movie";
+			this.getSearchResults(queryString.stringify(updateSearch));
+			this.setState({
+				search: updateSearch
+			});
 		}
 	}
 
@@ -100,13 +108,14 @@ export default class Home extends React.Component {
 
 	render() {
 		console.log(this.state.search);
+		let updateSearch = queryString.parse(this.props.location.search);
 		return (
 			<React.Fragment>
 				<Nav getMovies={this.getMovies}></Nav>
 				<br></br>
 				<br></br>
 				<br></br>
-				{this.state.movies !== undefined && this.state.movies.length !== 0 ? (
+				{this.state.movies !== undefined && updateSearch.s !== undefined ? (
 					<React.Fragment>
 						<Search
 							movies={this.state.movies}
@@ -124,7 +133,20 @@ export default class Home extends React.Component {
 						></Pagination>
 					</React.Fragment>
 				) : (
-					<Welcome></Welcome>
+					<React.Fragment>
+						<Welcome
+							movies={this.state.movies}
+							totalCounts={this.state.totalCounts}
+							search={this.state.search}
+							{...this.props}
+						></Welcome>
+						<Pagination
+							movies={this.state.movies}
+							totalCounts={this.state.totalCounts}
+							search={this.state.search}
+							changePage={this.changePage}
+						></Pagination>
+					</React.Fragment>
 				)}
 			</React.Fragment>
 		);

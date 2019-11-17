@@ -10,7 +10,7 @@ class Nav extends React.Component {
 			searchInput: ""
 		};
 	}
-	
+
 	//to get the history of searchers of users
 	getDataOptions = () => {
 		let userName = getUserFromCookie("userName");
@@ -33,7 +33,7 @@ class Nav extends React.Component {
 		return (
 			<div className='container'>
 				<nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
-					<div className='navbar-brand pl-5' style ={{cursor:"pointer"}}>
+					<div className='navbar-brand pl-5' style={{ cursor: "pointer" }}>
 						<i className='fas fa-film' />
 						<span> Movie Database</span>
 					</div>
@@ -49,51 +49,61 @@ class Nav extends React.Component {
 						<span className='navbar-toggler-icon'></span>
 					</button>
 					<div className='collapse navbar-collapse ' id='navbarCollapse'>
-						<ul className='navbar-nav ml-auto'>
-							<form className='form-inline mt-8 mt-md-0 text-center'>
-								<input
-									className='form-control mr-sm-2 ml-5'
-									type='text'
-									placeholder='Search movies'
-									aria-label='Search'
-									onChange={e => this.setState({ searchInput: e.target.value })}
-									value={this.state.searchInput}
-									list='encodings'
-								/>
+						<ul class='navbar-nav mr-auto'>​</ul>
+						<div class='input-group col-lg-3 col-sm-5 col-md-12 mt-2'>
+							<input
+								className='form-control '
+								type='text'
+								placeholder='Search movies'
+								aria-label='Search'
+								onChange={e => this.setState({ searchInput: e.target.value })}
+								value={this.state.searchInput}
+								list='encodings'
+							/>
 
-								<datalist id='encodings'>{this.getDataOptions()}</datalist>
-								<button
+							<datalist id='encodings'>{this.getDataOptions()}</datalist>
+							<div class='input-group-append'>
+								<div
 									className='btn my-sm-0 btn-secondary'
 									type='button'
 									onClick={() => {
 										this.props.getMovies(this.state.searchInput.trim());
 									}}
 								>
-									<span> Search</span>
-								</button>
-							</form>
-						</ul>
-						<span class='navbar-text'>
+									<i class='fa fa-search'></i>
+								</div>
+							</div>
+						</div>
+						<div class='input-group col-lg-3 col-sm-5 mt-2'>
 							{is_logged_in.isAuthenticated ? (
-								<ul className='navbar-nav ml-5'>
-									<Link to={`/`}>
-										<li
-											className='nav-item mr-3'
-											onClick={() => {
-												clearUser("userName");
-												clearUser("name");
-											}}
-										>
-											<i className='fas fa-sign-out-alt' />
-											<span> Log Out</span>
-										</li>
+								<div
+									className='input-group'
+									style={{ cursor: "pointer" }}
+									onClick={() => {
+										clearUser("userName");
+										clearUser("name");
+									}}
+								>
+									<Link to={"/"}>
+										<span>
+											<i className='fas fa-sign-out-alt' style={{ color: "white" }} />
+										</span>
+										<span style={{ color: "white" }}> Log Out</span>
 									</Link>
-								</ul>
+								</div>
 							) : null}
-						</span>
+						</div>
+						{/* <div class='input-group col-lg-3 col-sm-5 mt-2'>
+							<div class='input-group'>
+								<button class='btn btn-secondary' type='button'>
+									Login
+								</button>
+							</div>
+						</div> */}
 					</div>
 				</nav>{" "}
-				​ ​ ​
+				<br></br>
+				<br></br> ​ ​ ​
 			</div>
 		);
 	}

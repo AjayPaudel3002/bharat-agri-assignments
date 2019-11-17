@@ -12,7 +12,7 @@ const icons = [
 	{ name: "Awards", Awards: "fas fa-award fa-2x" },
 	{ name: "imdbRating", imdbRating: "fas fa-star-half-alt fa-2x" },
 	{ name: "imdbVotes", imdbVotes: "far fa-star fa-2x" },
-	{ name: "imdbID", imdbID: "fas fa-star-half-alt fa-2x" },
+	{ name: "imdbID", imdbID: "fas fa-list-ol fa-2x" },
 	{ name: "BoxOffice", BoxOffice: "far fa-money-bill-alt fa-2x" },
 	{ name: "Production", Production: "fab fa-product-hunt fa-2x" },
 	{ name: "Website", Website: "fas fa-globe fa-2x" }
