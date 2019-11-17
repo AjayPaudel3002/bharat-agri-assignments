@@ -1,5 +1,4 @@
 import React from "react";
-import {Redirect} from "react-router-dom"
 
 // import { FadeTransform, Fade, Stagger } from "react-animation-components";
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';

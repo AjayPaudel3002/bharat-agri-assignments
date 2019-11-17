@@ -51,7 +51,7 @@ class Nav extends React.Component {
 					</button>
 					<div className='collapse navbar-collapse ' id='navbarCollapse'>
 						<ul class='navbar-nav mr-auto'>​</ul>
-						<div class='input-group col-lg-3 col-sm-5 col-md-12 mt-2'>
+						<div class='input-group col-lg-5 col-sm-5 col-md-6 mt-2'>
 							<input
 								className='form-control '
 								type='text'
@@ -75,7 +75,7 @@ class Nav extends React.Component {
 								</div>
 							</div>
 						</div>
-						<div class='input-group col-lg-3 col-sm-5 mt-2'>
+						<div class='input-group col-lg-4 col-md-3 col-sm-5 mt-2'>
 							{is_logged_in.isAuthenticated ? (
 								<div
 									className='input-group'

@@ -7,9 +7,6 @@ import Welcome from "./Welcome";
 import Search from "./Search";
 import { setSearchForUserInLocalStorage } from "../users/local-storage";
 import { Pagination } from "./Pagination";
-import {PrivateRoute} from "./Routes"
-import {Router as BrowserRoute,Route}  from "react-router-dom"
-import Movie from "./Movie"
 
 export default class Home extends React.Component {
 	constructor(props) {

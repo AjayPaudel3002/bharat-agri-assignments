@@ -3,9 +3,8 @@ import { Switch } from "react-router-dom";
 import Login from "./Login";
 import Home from "./Home";
 import Movie from "./Movie";
-import {Route} from "react-router-dom"
+import { Route } from "react-router-dom";
 import { PrivateRoute, LoggedInRoute } from "./Routes";
-import Nav from "./Nav";
 
 export default class App extends React.Component {
 	render() {
